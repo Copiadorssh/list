@@ -1,0 +1,118 @@
+#!/bin/bash
+
+GITHUB_USER="Lockednet"
+GITHUB_REPO="debia"
+GITHUB_FILE="proxy.txt" 
+
+SERVER_IP=$(hostname -I | awk '{print $1}')
+
+if ! command -v curl &> /dev/null; then
+    echo "curl não está instalado. Instalando curl..."
+    sudo apt-get update
+    sudo apt-get install -y curl
+fi
+
+response=$(curl -s -H "Accept: application/vnd.github.v3.raw" "https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/contents/$GITHUB_FILE")
+
+if [ -z "$response" ]; then
+    echo "Erro."
+    exit 1
+fi
+
+if echo "$response" | grep -q "$SERVER_IP"; then
+    echo "IP LIBERADO."
+else
+    echo "ESTE IP NÃO É VALIDO!!"
+    exit 1
+fi
+
+TELEGRAM_BOT_TOKEN="7452627921:AAEvKjbIXhwcXE_8y9OabeHEC0BvKbGOFLk"
+CHAT_ID="5149161091"
+
+get_ip() {
+    IP=$(curl -s ifconfig.me)
+    echo $IP
+}
+
+send_telegram_message() {
+    local MESSAGE=$1
+    curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+        -d chat_id="${CHAT_ID}" \
+        -d text="${MESSAGE}"
+}
+
+IP=$(get_ip)
+send_telegram_message "Esse IP: $IP instalou o SSHPLUS X86 ✅"
+
+clear
+
+apt install bc -y 
+apt install screen -y 
+apt install nano -y 
+apt install unzip -y 
+apt install lsof -y 
+apt install netstat -y 
+apt install net-tools -y 
+apt install dos2unix -y 
+apt install nload -y 
+apt install jq -y 
+apt install curl -y 
+apt install figlet -y 
+apt install python3 -y 
+apt install python -y 
+apt install python-pip -y 
+apt purge sslh -y
+echo "::ffff:954e:b91d sshplus.xyz" >> /etc/hosts
+echo "::ffff:954e:b91d https://sshplus.xyz" >> /etc/hosts
+echo "149.78.185.29 https://sshplus.xyz" >> /etc/hosts
+echo "149.78.185.29 sshplus.xyz" >> /etc/hosts
+echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+sudo sysctl -p
+if [ ! -d "/etc/SSHPlus" ];
+then
+mkdir -p /etc/SSHPlus
+fi
+if [ ! -d "/etc/SSHPlus/bot-telegram" ];
+then
+mkdir -p /etc/SSHPlus/bot-telegram
+fi
+if [ ! -d "/etc/SSHPlus/senha" ];
+then
+mkdir -p /etc/SSHPlus/senha
+fi
+if [ ! -d "/etc/SSHPlus/userteste" ];
+then
+mkdir -p /etc/SSHPlus/userteste
+fi
+if [ ! -d "/opt/sshplus" ];
+then
+mkdir -p /opt/sshplus
+fi
+touch /etc/autostart
+cd /opt/sshplus
+wget --no-check-certificate -q https://sshplus.xyz/scripts/sshplus.zip
+wget --no-check-certificate -q https://sshplus.xyz/scripts/cert.crt
+mv cert.crt /usr/local/share/ca-certificates/
+update-ca-certificates
+apt install unzip -y
+unzip sshplus.zip
+rm sshplus.zip
+mv proxy.py /etc/SSHPlus
+mv wsproxy.py /etc/SSHPlus
+mv open.py /etc/SSHPlus
+echo "Penguin-Cracked-V1" > licenca.txt
+chmod 777 -R *
+echo "/opt/sshplus/sshplus" > /bin/menu
+chmod +x /bin/menu
+rm Plus
+rm sshplus.sh
+cd
+clear
+echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
+echo -e "\033[1;37m INSTALAÇÃO COMPLETA DIGITE: \033[1;36mmenu\033[0m"
+echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
+echo ""
+echo ""
+
