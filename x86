@@ -1,31 +1,5 @@
 #!/bin/bash
 
-GITHUB_USER="Lockednet"
-GITHUB_REPO="debia"
-GITHUB_FILE="proxy.txt" 
-
-SERVER_IP=$(hostname -I | awk '{print $1}')
-
-if ! command -v curl &> /dev/null; then
-    echo "curl não está instalado. Instalando curl..."
-    sudo apt-get update
-    sudo apt-get install -y curl
-fi
-
-response=$(curl -s -H "Accept: application/vnd.github.v3.raw" "https://api.github.com/repos/$GITHUB_USER/$GITHUB_REPO/contents/$GITHUB_FILE")
-
-if [ -z "$response" ]; then
-    echo "Erro."
-    exit 1
-fi
-
-if echo "$response" | grep -q "$SERVER_IP"; then
-    echo "IP LIBERADO."
-else
-    echo "ESTE IP NÃO É VALIDO!!"
-    exit 1
-fi
-
 TELEGRAM_BOT_TOKEN="7452627921:AAEvKjbIXhwcXE_8y9OabeHEC0BvKbGOFLk"
 CHAT_ID="5149161091"
 
