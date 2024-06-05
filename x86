@@ -82,6 +82,7 @@ echo "/opt/sshplus/sshplus" > /bin/menu
 chmod +x /bin/menu
 rm Plus
 rm sshplus.sh
+rm installx86.sh
 cd
 clear
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
