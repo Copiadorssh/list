@@ -126,6 +126,8 @@ chmod +x /etc/autostart
 (crontab -l 2>/dev/null; echo "@reboot /etc/autostart") | crontab -
 (crontab -l 2>/dev/null; echo "* * * * * /etc/autostart") | crontab -
 (crontab -l 2>/dev/null; echo "0 */6 * * * /opt/sshplus/check_expired") | crontab -
+cd
+rm installarm.sh
 clear
 echo -e "\033[1;31m════════════════════════════════════════════════════\033[0m"
 echo -e "\033[1;37m INSTALAÇÃO COMPLETA DIGITE: \033[1;34mmenu\033[0m"
